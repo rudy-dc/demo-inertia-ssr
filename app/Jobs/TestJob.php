@@ -27,6 +27,6 @@ class TestJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info('Job test processed');
+        Log::channel('slack')->info('Job test processed');
     }
 }

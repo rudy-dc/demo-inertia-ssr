@@ -27,8 +27,12 @@ class CommandTest extends Command
      */
     public function handle(): void
     {
-        Log::info("Exec command test");
+        if (config('logging.channels.slack.url')) {
+            Log::channel('slack')->info("Exec command test");
 
-        TestJob::dispatch()->delay(now()->addSeconds(30));
+            TestJob::dispatch()->delay(now()->addSeconds(10));
+        } else {
+            Log::error("LOG_SLACK_WEBHOOK_URL not filled");
+        }
     }
 }
