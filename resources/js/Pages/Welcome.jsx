@@ -4,8 +4,8 @@ export default function Welcome(props) {
     return (
         <>
             <Head>
-                <title>Hola</title>
-                <meta name="description" content="tobefind"/>
+                <title>Welcome</title>
+                <meta name="description" content="SEO Welcome"/>
             </Head>
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
