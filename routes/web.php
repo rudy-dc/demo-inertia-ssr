@@ -26,6 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('new-url', function () {
+    return 'redirected ';
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
@@ -43,3 +47,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/redirects.php';
