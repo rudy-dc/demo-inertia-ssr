@@ -30,9 +30,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/demo', [PageController::class, 'demo']);
 
-    Route::get('/lld/{vehicleConstructor}', [PageController::class, 'vehicleConstructor'])->name('seo.vehicleConstructor');
-    Route::get('/lld/{vehicleConstructor}/{vehicleModel}', [PageController::class, 'vehicleModel'])->name('seo.vehicleModel');
-    Route::get('/lld/{vehicleConstructor}/{vehicleModel}/{vehicleSpecification}', [PageController::class, 'vehicleSpecification'])->name('seo.vehicleSpecification');
+    Route::get('/location-longue-duree/{vehicleConstructor}', [PageController::class, 'vehicleConstructor'])->name('seo.vehicleConstructor')->scopeBindings();
+    Route::get('/location-longue-duree/{vehicleConstructor}/{vehicleModel}', [PageController::class, 'vehicleModel'])->name('seo.vehicleModel')->scopeBindings();
+    Route::get('/location-longue-duree/{vehicleConstructor}/{vehicleModel}/{vehicleSpecification}', [PageController::class, 'vehicleSpecification'])->name('seo.vehicleSpecification')->scopeBindings();
 });
 
 Route::middleware('auth')->group(function () {
