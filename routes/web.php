@@ -26,19 +26,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('new-url', function () {
-    return 'redirected ';
-});
-
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
+    Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/demo', [PageController::class, 'demo']);
+
+    Route::get('/lld/{vehicleConstructor}', [PageController::class, 'vehicleConstructor'])->name('seo.vehicleConstructor');
+    Route::get('/lld/{vehicleConstructor}/{vehicleModel}', [PageController::class, 'vehicleModel'])->name('seo.vehicleModel');
+    Route::get('/lld/{vehicleConstructor}/{vehicleModel}/{vehicleSpecification}', [PageController::class, 'vehicleSpecification'])->name('seo.vehicleSpecification');
 });
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
