@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Catcher;
+use App\Models\Vehicle;
 use App\Models\VehicleConstructor;
 use App\Models\VehicleModel;
 use App\Models\VehicleSpecification;
@@ -28,13 +29,25 @@ class CarSynchronizer
     public function sync()
     {
         $this->getRowsFromPath();
+        $currentUrls = Vehicle::get()->pluck('url')->all();
 
         foreach ($this->rows as $row) {
             $constructor = $this->getVehicleConstructor($row['constructor']);
             $vehicleModel = $this->getVehicleModel($row['model_expanded'], $constructor);
+            $vehicleSpecification = null;
             
             if ($row['specification']) {
-                $this->getVehicleSpecification($row['specification'], $vehicleModel);
+                $vehicleSpecification = $this->getVehicleSpecification($row['specification'], $vehicleModel);
+            }
+            
+            if (!in_array($row['source_url'], $currentUrls)) {
+                Vehicle::create([
+                    'vehicle_constructor_id' => $constructor->id,
+                    'vehicle_model_id' => $vehicleModel->id,
+                    'vehicle_specification_id' => $vehicleSpecification ? $vehicleSpecification->id : null,
+                    'designation' => $row['designation'],
+                    'url' => $row['source_url']
+                ]);
             }
         }
     }

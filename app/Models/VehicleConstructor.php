@@ -30,6 +30,11 @@ class VehicleConstructor extends Model
         return $this->hasMany(VehicleSpecification::class);
     }
 
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
     public function catchers(): MorphMany
     {
         return $this->morphMany(Catcher::class, 'catcherable');

@@ -39,7 +39,8 @@ class RunResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('path')
+                TextColumn::make('path'),
+                TextColumn::make('created_at')->since(),
             ])
             ->filters([
                 //

@@ -41,10 +41,13 @@ class PageController extends Controller
 
     public function vehicleSpecification(VehicleConstructor $vehicleConstructor, VehicleModel $vehicleModel, VehicleSpecification $vehicleSpecification)
     {
+        $vehicles = $vehicleSpecification->vehicles()->get();
+
         return Inertia::render('Seo/VehicleSpecification', [
             'vehicleConstructor' => $vehicleConstructor,
             'vehicleModel' => $vehicleModel,
             'vehicleSpecification' => $vehicleSpecification,
+            'vehicles' => $vehicles
         ]);
     }
 
