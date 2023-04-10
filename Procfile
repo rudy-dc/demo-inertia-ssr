@@ -1,0 +1,1 @@
+postdeploy: bash .scalingo/postbuild.sh
