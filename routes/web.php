@@ -24,9 +24,13 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/filament', function () {
+        return Inertia::location('/admin');
+    })->name('admin');
+
     Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
     Route::get('/demo', [PageController::class, 'demo']);
 

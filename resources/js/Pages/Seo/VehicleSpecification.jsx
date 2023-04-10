@@ -14,11 +14,11 @@ export default function VehicleModel(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <div class="grid grid-cols-4 gap-4">
+                            <div className="grid grid-cols-4 gap-4">
                                 {props.vehicles.map((vehicle, index) => {
-                                    return <div class="p-4 rounded-lg shadow-lg bg-emerald-800">
+                                    return <div key={index} className="p-4 rounded-lg shadow-lg bg-emerald-800">
                                         {vehicle.designation}
-                                        <a class="block text-xs" href={vehicle.url} target="_blank">
+                                        <a className="block text-xs" href={vehicle.url} target="_blank">
                                             {vehicle.url}
                                         </a>
                                     </div>

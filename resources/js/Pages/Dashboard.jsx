@@ -17,7 +17,7 @@ export default function Dashboard(props) {
                             <ul>
                                 {props.vehicleConstructors.map((value, index) => {
                                     return <li key={index}>
-                                        <a class="hover:underline" href={route('seo.vehicleConstructor', {vehicleConstructor: value})}>{value.designation}</a>
+                                        <a className="hover:underline" href={route('seo.vehicleConstructor', {vehicleConstructor: value})}>{value.designation}</a>
                                     </li>
                                 })}
                             </ul>

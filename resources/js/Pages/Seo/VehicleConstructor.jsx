@@ -14,13 +14,13 @@ export default function VehicleConstructor(props) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <ul>
+                            <div className="grid grid-cols-4 gap-4">
                                 {props.vehicleModels.map((value, index) => {
-                                    return <li key={index}>
-                                        <a class="hover:underline" href={route('seo.vehicleModel', {vehicleConstructor: props.vehicleConstructor.slug, vehicleModel: value.slug})}>{value.designation}</a>
-                                    </li>
+                                    return <div key={index} className="rounded-lg text-center border-2 border-transparent hover:border-2 hover:border-blue-600">
+                                        <a className="block p-4" href={route('seo.vehicleModel', {vehicleConstructor: props.vehicleConstructor.slug, vehicleModel: value.slug})}>{value.designation}</a>
+                                    </div>
                                 })}
-                            </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
