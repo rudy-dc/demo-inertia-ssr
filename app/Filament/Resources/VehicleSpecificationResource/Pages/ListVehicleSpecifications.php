@@ -5,6 +5,7 @@ namespace App\Filament\Resources\VehicleSpecificationResource\Pages;
 use App\Filament\Resources\VehicleSpecificationResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Filters\Layout;
 
 class ListVehicleSpecifications extends ListRecords
 {
@@ -20,5 +21,10 @@ class ListVehicleSpecifications extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
+    }
+
+    protected function getTableFiltersLayout(): ?string
+    {
+        return Layout::AboveContent;
     }
 }
