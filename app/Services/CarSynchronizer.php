@@ -99,25 +99,29 @@ class CarSynchronizer
         return $vehicleModel;
     }
 
-    private function getVehicleSpecification(array $catcher, VehicleModel $vehicleModel): VehicleSpecification
+    private function getVehicleSpecification(array $catcher, VehicleModel $vehicleModel): ?VehicleSpecification
     {
-        $vehicleSpecification = $vehicleModel->vehicleSpecifications()->whereHas('catchers', function (Builder $query) use ($catcher) {
-            $query->where('designation', $catcher['code']);
-        })->first();
+        if ($catcher['code'] && $catcher['label']) {
+            $vehicleSpecification = $vehicleModel->vehicleSpecifications()->whereHas('catchers', function (Builder $query) use ($catcher) {
+                $query->where('designation', $catcher['code']);
+            })->first();
 
-        if (!$vehicleSpecification) {
-            $vehicleSpecification = VehicleSpecification::create([
-                'vehicle_constructor_id' => $vehicleModel->vehicle_constructor_id,
-                'vehicle_model_id' => $vehicleModel->id,
-                'designation' => ucwords($catcher['label']),
-                'slug' => Str::slug($catcher['label'])
-            ]);
+            if (!$vehicleSpecification) {
+                $vehicleSpecification = VehicleSpecification::create([
+                    'vehicle_constructor_id' => $vehicleModel->vehicle_constructor_id,
+                    'vehicle_model_id' => $vehicleModel->id,
+                    'designation' => ucwords($catcher['label']),
+                    'slug' => Str::slug($catcher['label'])
+                ]);
 
-            $vehicleSpecification->catchers()->save(
-                new Catcher(['designation' => $catcher['code']])
-            );
+                $vehicleSpecification->catchers()->save(
+                    new Catcher(['designation' => $catcher['code']])
+                );
+            }
+
+            return $vehicleSpecification;
+        } else {
+            return null;
         }
-
-        return $vehicleSpecification;
     }
 }

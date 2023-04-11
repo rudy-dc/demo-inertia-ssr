@@ -31,11 +31,17 @@ class PageController extends Controller
     public function vehicleModel(VehicleConstructor $vehicleConstructor, VehicleModel $vehicleModel)
     {
         $vehicleSpecifications = $vehicleModel->vehicleSpecifications()->visible()->orderBy('designation')->get();
+        $vehicles = [];
+
+        if (count($vehicleSpecifications) == 0 && $vehicleModel->vehicles()->count() > 0) {
+            $vehicles = $vehicleModel->vehicles()->get();
+        }
 
         return Inertia::render('Seo/VehicleModel', [
             'vehicleConstructor' => $vehicleConstructor,
             'vehicleModel' => $vehicleModel,
             'vehicleSpecifications' => $vehicleSpecifications,
+            'vehicles' => $vehicles
         ]);
     }
 
