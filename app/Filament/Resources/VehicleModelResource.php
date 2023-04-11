@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CatcherResource\RelationManagers\CatchersRelationManager;
 use App\Filament\Resources\VehicleModelResource\Pages;
 use App\Filament\Resources\VehicleModelResource\RelationManagers;
 use App\Models\VehicleModel;
@@ -30,7 +31,7 @@ class VehicleModelResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('vehicle_constructor_id')
-                    ->relationship('vehicleConstructor', 'id')
+                    ->relationship('vehicleConstructor', 'designation')
                     ->required(),
                 Forms\Components\TextInput::make('designation')
                     ->required()
@@ -65,7 +66,7 @@ class VehicleModelResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CatchersRelationManager::class
         ];
     }
     
