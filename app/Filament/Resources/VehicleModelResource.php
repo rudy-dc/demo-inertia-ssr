@@ -7,12 +7,14 @@ use App\Filament\Resources\VehicleModelResource\Pages;
 use App\Filament\Resources\VehicleModelResource\RelationManagers;
 use App\Models\VehicleModel;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -40,6 +42,8 @@ class VehicleModelResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Toggle::make('is_visible'),
+                Forms\Components\Select::make('category')
+                    ->options(['SUV', 'Sportive', 'Hyper sportive']),
             ]);
     }
 
@@ -53,7 +57,17 @@ class VehicleModelResource extends Resource
                     ->boolean()
             ])
             ->filters([
-                //
+                Filter::make('search')
+                    ->form([
+                        TextInput::make('designation')->label('Désignation'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['designation'],
+                                fn (Builder $query, $value): Builder => $query->where('designation', 'like', "%$value%"),
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

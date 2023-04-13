@@ -16,7 +16,7 @@ export default function VehicleModel(props) {
                         <div className="p-6 text-gray-900 dark:text-gray-100">
                             <div className="grid grid-cols-4 gap-4">
                                 {props.vehicles.map((vehicle, index) => {
-                                    return <div key={index} className="p-4 rounded-lg shadow-lg bg-emerald-800">
+                                    return <div key={index} className="p-4 rounded-lg shadow-lg bg-yellow-200">
                                         {vehicle.designation}
                                         <a className="block text-xs" href={vehicle.url} target="_blank">
                                             {vehicle.url}

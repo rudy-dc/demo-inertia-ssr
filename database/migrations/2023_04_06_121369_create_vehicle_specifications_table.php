@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('designation');
             $table->string('slug');
             $table->boolean('is_visible')->default(true);
+            $table->string('category')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
